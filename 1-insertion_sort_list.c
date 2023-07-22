@@ -10,13 +10,13 @@
  */
 void swap_nodes(listint_t **list, listint_t *node_1, listint_t *node_2)
 {
-	if (node_1->prev != NULL)
-		node_1->prev->next = node_2;
+	if (node_2->next != NULL)
+		node_2->next->prev = node_1;
 	else
 		*list = node_2;
 
-	if (node_2->next)
-		node_2->next->prev = node_1;
+	if (node_1->prev)
+		node_1->prev->next = node_2;
 
 	node_1->next = node_2->next;
 	node_2->prev = node_1->prev;
@@ -45,11 +45,11 @@ void insertion_sort_list(listint_t **list)
 
 	while (next_node)
 	{
-		curr_node = next_node->prev;
+		curr_node = next_node;
 
-		while (curr_node && curr_node->n > next_node->n)
+		while (curr_node->prev && curr_node->prev->n > next_node->n)
 		{
-			swap_nodes(list, curr_node, next_node);
+			swap_nodes(list, curr_node->prev, curr_node);
 			curr_node = curr_node->prev;
 			print_list(*list);
 		}
