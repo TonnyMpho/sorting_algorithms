@@ -3,6 +3,25 @@
 #include "sort.h"
 
 /**
+ * find_max - find the max
+ * @array: - the array to find the max
+ * @size: the size of the array
+ * Return: the max
+ */
+int find_max(int *array, size_t size)
+{
+	int max = array[0];
+	size_t i;
+
+	for (i = 1; i < size; i++)
+	{
+		if (array[i] > max)
+			max = array[i];
+	}
+	return (max);
+}
+
+/**
  * counting_sort - function that sorts an array of integers
  * in ascending order using the Counting sort algorithm
  *
@@ -13,14 +32,11 @@
 void counting_sort(int *array, size_t size)
 {
 	size_t i;
-	int j, max = array[0];
+	int j, max = find_max(array, size);
 	int *count_array, *tmp_array;
 
-	for (i = 1; i < size; i++)
-	{
-		if (array[i] > max)
-			max = array[i];
-	}
+	if (!array || size < 2)
+		return;
 
 	count_array = malloc((max + 1) * sizeof(int));
 	if (count_array == NULL)
